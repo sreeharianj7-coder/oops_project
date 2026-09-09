@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration | Smart Hostel Attendance System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-badge">📍</div>
+        <div class="brand-text">
+          <span class="title">SMART HOSTEL ATTENDANCE</span>
+          <span class="subtitle">Adi Shankara Institute of Science & Technology</span>
+        </div>
+      </a>
+      <div class="nav-auth">
+        <a href="login.html" class="btn btn-sm btn-outline-blue">Login</a>
+        <a href="index.html" class="btn btn-sm btn-secondary">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Main Content -->
+  <main class="container" style="padding-top: 3.5rem; padding-bottom: 5rem;">
+    <div class="card" style="max-width: 820px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(0, 210, 255, 0.4); font-size: 1.8rem; margin-bottom: 1rem; box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);">
+          📝
+        </div>
+        <h2 style="font-size: 1.95rem; margin-bottom: 0.4rem;">Student Registration</h2>
+        <p style="color: var(--text-secondary); font-size: 0.92rem;">
+          Create your verified hostel resident account with Adi Shankara Institute credentials.
+        </p>
+      </div>
+
+      <div id="reg-error-box" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 0.85rem 1rem; color: #f87171; font-size: 0.88rem; margin-bottom: 1.5rem;">
+      </div>
+
+      <form id="register-form">
+        <!-- Personal & Identity Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-name">
+              <span>👤</span> Full Name
+            </label>
+            <input type="text" id="reg-name" class="form-control" placeholder="e.g. Sreehari K A" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-student-id">
+              <span>🎓</span> Student ID / Roll No.
+            </label>
+            <input type="text" id="reg-student-id" class="form-control" placeholder="e.g. ASIET2024CS099" required style="text-transform: uppercase;">
+          </div>
+        </div>
+
+        <!-- Contact Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-email">
+              <span>✉️</span> College / Personal Email
+            </label>
+            <input type="email" id="reg-email" class="form-control" placeholder="e.g. sreehari.cs@adishankara.ac.in" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-phone">
+              <span>📞</span> Phone Number
+            </label>
+            <input type="tel" id="reg-phone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+          </div>
+        </div>
+
+        <!-- Academic Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-course">
+              <span>📚</span> Course / Program
+            </label>
+            <input type="text" id="reg-course" class="form-control" value="B.Tech Computer Science and Engineering" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-department">
+              <span>🏛️</span> Department
+            </label>
+            <input type="text" id="reg-department" class="form-control" value="Computer Science and Engineering" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-academic-year">
+              <span>🗓️</span> Academic Year
+            </label>
+            <input type="text" id="reg-academic-year" class="form-control" value="2023 - 2027" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-hostel-id">
+              <span>🏢</span> Hostel Allocation
+            </label>
+            <select id="reg-hostel-id" class="form-control" required>
+              <option value="1">ASIET Main College Hostel (Block A)</option>
+              <option value="2">ASIET Boys Hostel (Block B)</option>
+              <option value="3">ASIET Ladies Hostel (Block C)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-room">
+              <span>🚪</span> Room Number
+            </label>
+            <input type="text" id="reg-room" class="form-control" placeholder="e.g. A-305" required>
+          </div>
+        </div>
+
+        <!-- Password Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-password">
+              <span>🔒</span> Password
+            </label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-confirm-password">
+              <span>🔒</span> Confirm Password
+            </label>
+            <input type="password" id="reg-confirm-password" class="form-control" placeholder="Re-enter password" minlength="6" required>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <button type="submit" id="btn-register-submit" class="btn btn-primary btn-lg" style="width: 100%;">
+            <span>✨</span> CREATE ACCOUNT
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.8rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.2rem; font-size: 0.9rem; color: var(--text-secondary);">
+        Already registered? <a href="login.html" style="font-weight: 600;">Log in here</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Auth.redirectIfLoggedIn();
+
+      const form = document.getElementById('register-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const errorBox = document.getElementById('reg-error-box');
+        errorBox.style.display = 'none';
+
+        const name = document.getElementById('reg-name').value.trim();
+        const studentId = document.getElementById('reg-student-id').value.trim().toUpperCase();
+        const email = document.getElementById('reg-email').value.trim().toLowerCase();
+        const phone = document.getElementById('reg-phone').value.trim();
+        const course = document.getElementById('reg-course').value.trim();
+        const department = document.getElementById('reg-department').value.trim();
+        const academicYear = document.getElementById('reg-academic-year').value.trim();
+        const hostelId = parseInt(document.getElementById('reg-hostel-id').value, 10);
+        const roomNumber = document.getElementById('reg-room').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+        if (password !== confirmPassword) {
+          errorBox.innerText = 'Passwords do not match.';
+          errorBox.style.display = 'block';
+          showToast('Passwords do not match', 'error');
+          return;
+        }
+
+        const submitBtn = document.getElementById('btn-register-submit');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>⏳</span> Creating Account...`;
+
+        const payload = {
+          name,
+          studentId,
+          email,
+          phone,
+          course,
+          department,
+          academicYear,
+          hostelId,
+          roomNumber,
+          password,
+          confirmPassword
+        };
+
+        try {
+          const result = await Auth.register(payload);
+          if (result.success) {
+            showToast('Account created successfully! Redirecting...', 'success');
+            setTimeout(() => {
+              window.location.href = 'dashboard.html';
+            }, 600);
+          } else {
+            errorBox.innerText = result.message || 'Registration failed.';
+            errorBox.style.display = 'block';
+            showToast(result.message || 'Registration failed', 'error');
+          }
+        } catch (err) {
+          errorBox.innerText = 'Registration error: ' + err.message;
+          errorBox.style.display = 'block';
+          showToast(err.message, 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>✨</span> CREATE ACCOUNT`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

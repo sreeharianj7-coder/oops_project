@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login | Smart Hostel Attendance System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-badge">📍</div>
+        <div class="brand-text">
+          <span class="title">SMART HOSTEL ATTENDANCE</span>
+          <span class="subtitle">Adi Shankara Institute of Science & Technology</span>
+        </div>
+      </a>
+      <div class="nav-auth">
+        <a href="register.html" class="btn btn-sm btn-outline-blue">Register</a>
+        <a href="index.html" class="btn btn-sm btn-secondary">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Main Content -->
+  <main class="container container-narrow" style="padding-top: 3.5rem; padding-bottom: 5rem;">
+    <div class="card" style="max-width: 480px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px; background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(0, 210, 255, 0.4); font-size: 1.8rem; margin-bottom: 1rem; box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);">
+          🔐
+        </div>
+        <h2 style="font-size: 1.85rem; margin-bottom: 0.4rem;">Student Login</h2>
+        <p style="color: var(--text-secondary); font-size: 0.92rem;">
+          Enter your Student ID or Email to access your attendance dashboard.
+        </p>
+      </div>
+
+      <div id="login-error-box" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 0.85rem 1rem; color: #f87171; font-size: 0.88rem; margin-bottom: 1.5rem;">
+        Invalid Student ID/Email or Password.
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="identifier">
+            <span>👤</span> Student ID or Email Address
+          </label>
+          <input type="text" id="identifier" class="form-control" placeholder="e.g. ASIET2024CS001 or student@adishankara.ac.in" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">
+            <span>🔑</span> Password
+          </label>
+          <div class="input-password-wrapper">
+            <input type="password" id="password" class="form-control" placeholder="Enter your account password" required autocomplete="current-password">
+            <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('password', this)" title="Show/Hide Password">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1rem;">
+          <span>⚡</span> LOGIN
+        </button>
+      </form>
+
+      <!-- Quick Demo Fill Helper for Viva / Examiners -->
+      <div style="margin-top: 1.5rem; padding: 0.85rem; background: rgba(8, 13, 26, 0.6); border: 1px dashed rgba(59, 130, 246, 0.3); border-radius: 10px; text-align: center;">
+        <span style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 0.4rem;">Quick Testing Demo Credentials:</span>
+        <button type="button" class="btn btn-sm btn-outline-blue" onclick="fillDemoCredentials()" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;">
+          Auto-Fill: ASIET2024CS001 / Password@123
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.8rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.2rem; font-size: 0.9rem; color: var(--text-secondary);">
+        Don't have an account? <a href="register.html" style="font-weight: 600;">Register now</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Auth.redirectIfLoggedIn();
+
+      const form = document.getElementById('login-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const identifier = document.getElementById('identifier').value.trim();
+        const password = document.getElementById('password').value;
+        const submitBtn = document.getElementById('btn-login-submit');
+        const errorBox = document.getElementById('login-error-box');
+
+        errorBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>⏳</span> Authenticating...`;
+
+        try {
+          const result = await Auth.login(identifier, password);
+          if (result.success) {
+            showToast('Login successful! Redirecting...', 'success');
+            setTimeout(() => {
+              window.location.href = 'dashboard.html';
+            }, 600);
+          } else {
+            errorBox.innerText = result.message || 'Invalid Student ID/Email or Password.';
+            errorBox.style.display = 'block';
+            showToast(result.message || 'Login failed', 'error');
+          }
+        } catch (err) {
+          errorBox.innerText = 'Unable to connect to authentication server.';
+          errorBox.style.display = 'block';
+          showToast(err.message, 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>⚡</span> LOGIN`;
+        }
+      });
+    });
+
+    function togglePasswordVisibility(fieldId, btn) {
+      const field = document.getElementById(fieldId);
+      if (field.type === 'password') {
+        field.type = 'text';
+        btn.innerText = '🔒';
+      } else {
+        field.type = 'password';
+        btn.innerText = '👁️';
+      }
+    }
+
+    function fillDemoCredentials() {
+      document.getElementById('identifier').value = 'ASIET2024CS001';
+      document.getElementById('password').value = 'Password@123';
+      showToast('Demo credentials filled!', 'info');
+    }
+  </script>
+</body>
+</html>

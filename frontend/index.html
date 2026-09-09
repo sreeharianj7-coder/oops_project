@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Hostel Attendance Management System | Geolocation Verified</title>
+  <meta name="description" content="A modern digital hostel attendance solution using secure authentication and browser geolocation verification for Adi Shankara Institute of Science and Technology.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="main-nav">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-badge">📍</div>
+        <div class="brand-text">
+          <span class="title">SMART HOSTEL ATTENDANCE</span>
+          <span class="subtitle">Adi Shankara Institute of Science & Technology</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#features" class="nav-link">Key Features</a></li>
+        <li><a href="#workflow" class="nav-link">How It Works</a></li>
+        <li><a href="#tech-stack" class="nav-link">Tech Stack</a></li>
+      </ul>
+      <div class="nav-auth" id="nav-auth-section">
+        <a href="login.html" class="btn btn-sm btn-secondary">Student Login</a>
+        <a href="register.html" class="btn btn-sm btn-primary">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="hero-pill">
+        <span>🛡️</span> Next-Gen Smart Campus Security & Attendance
+      </div>
+      <h1 class="hero-title">
+        SMART HOSTEL<br>ATTENDANCE MANAGEMENT SYSTEM
+      </h1>
+      <p class="hero-subtitle">
+        Secure • Smart • Location Verified
+      </p>
+      <p class="hero-description">
+        A modern digital hostel attendance solution designed to simplify student attendance management through secure authentication and real-time geolocation verification.
+      </p>
+      <div class="hero-buttons">
+        <a href="login.html" class="btn btn-primary btn-lg">
+          <span>🔐</span> STUDENT LOGIN
+        </a>
+        <a href="register.html" class="btn btn-secondary btn-lg">
+          <span>📝</span> REGISTER NOW
+        </a>
+      </div>
+
+      <!-- Abstract Tech Dashboard Graphic Preview -->
+      <div style="margin-top: 4rem; position: relative;">
+        <div class="card" style="max-width: 960px; margin: 0 auto; background: rgba(11, 17, 32, 0.9); border-color: rgba(0, 210, 255, 0.35); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.9), 0 0 30px rgba(37, 99, 235, 0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+              <span style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+              <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+              <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #94a3b8; margin-left: 0.5rem;">GEOLOCATION VERIFICATION ENGINE • ACTIVE</span>
+            </div>
+            <span class="badge badge-verified">LIVE SATELLITE GPS READY</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; text-align: left;">
+            <div style="background: rgba(6, 9, 17, 0.7); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Hostel Perimeter</div>
+              <div style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: #fff; margin: 0.3rem 0;">ASIET Main Hostel</div>
+              <div style="font-size: 0.8rem; color: #38bdf8; font-family: var(--font-mono);">Radius: 100 meters</div>
+            </div>
+
+            <div style="background: rgba(6, 9, 17, 0.7); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Distance Algorithm</div>
+              <div style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: #34d399; margin: 0.3rem 0;">Haversine Formula</div>
+              <div style="font-size: 0.8rem; color: #94a3b8; font-family: var(--font-mono);">Backend Validation</div>
+            </div>
+
+            <div style="background: rgba(6, 9, 17, 0.7); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Security Level</div>
+              <div style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: #00d2ff; margin: 0.3rem 0;">BCrypt + Server Auth</div>
+              <div style="font-size: 0.8rem; color: #94a3b8; font-family: var(--font-mono);">Anti-Spoofing Enabled</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section class="section" id="about" style="background: rgba(11, 17, 32, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">System Overview</span>
+        <h2 class="section-title">About The System</h2>
+        <p class="section-subtitle">
+          Engineered for college hostels to replace cumbersome paper registers with an automated, tamper-proof digital attendance workflow.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
+        <div class="card">
+          <h3 style="font-size: 1.4rem; color: #38bdf8; margin-bottom: 1rem;">Purpose & Vision</h3>
+          <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            Hostel management requires strict verification that students are physically present inside their allocated residential perimeter during evening roll-call hours.
+          </p>
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7;">
+            The <strong>Smart Hostel Attendance Management System</strong> enforces accurate verification by combining secure student accounts with real-time GPS coordinate validation computed authoritatively on the Java Spring Boot backend using the mathematical Haversine formula.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.4rem; color: #34d399; margin-bottom: 1rem;">Department & Institution</h3>
+          <p style="color: #fff; font-weight: 600; margin-bottom: 0.25rem;">Adi Shankara Institute of Science and Technology</p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 0.8rem;">Mattoor, Kalady, Ernakulam, Kerala - 683574</p>
+          <div style="background: rgba(8, 13, 26, 0.8); padding: 1rem; border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.2);">
+            <div style="font-size: 0.82rem; color: #38bdf8;">Program & Department:</div>
+            <div style="color: #fff; font-size: 0.92rem; font-weight: 600;">B.Tech Computer Science and Engineering</div>
+            <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 0.4rem;">Academic Year: 2023 - 2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-title">Key Features</h2>
+        <p class="section-subtitle">
+          Built with robust Object-Oriented Architecture, secure credential storage, and real-time geospatial validation.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">🔐</div>
+          <h3 class="feature-title">Secure Authentication</h3>
+          <p class="feature-desc">
+            Industry-standard student registration and login with BCrypt salted password hashing to protect user credentials.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">📱</div>
+          <h3 class="feature-title">Digital Attendance</h3>
+          <p class="feature-desc">
+            Frictionless one-click attendance marking interface that prevents duplicate entries on the same calendar day.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">🛰️</div>
+          <h3 class="feature-title">Geolocation Verification</h3>
+          <p class="feature-desc">
+            Direct integration with the browser Geolocation API (`navigator.geolocation`) to capture high-accuracy GPS coordinates.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">🏢</div>
+          <h3 class="feature-title">Student Management</h3>
+          <p class="feature-desc">
+            Organized student profiles, room allocations, hostel blocks, and academic department details backed by MySQL.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">📊</div>
+          <h3 class="feature-title">Attendance History</h3>
+          <p class="feature-desc">
+            Comprehensive audit log allowing students to view past timestamps, location verification statuses, and export reports.
+          </p>
+        </div>
+
+        <!-- Feature 6 (Future Module) -->
+        <div class="card feature-card future-card">
+          <div class="feature-icon-wrapper">👤</div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 class="feature-title">Face Recognition</h3>
+            <span class="badge badge-future">FUTURE DEVELOPMENT</span>
+          </div>
+          <p class="feature-desc">
+            Face recognition will be integrated in a future phase of the project using modern biometric verification microservices.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works (7 Steps) -->
+  <section class="section" id="workflow" style="background: rgba(11, 17, 32, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Verification Process</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">
+          Step-by-step attendance verification workflow designed to ensure location authenticity.
+        </p>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4 class="step-title">Student Registers</h4>
+          <p class="step-desc">Student signs up with Student ID, room allocation, and encrypted password.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4 class="step-title">Student Logs In</h4>
+          <p class="step-desc">Student authenticates securely to access the personalized dashboard.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4 class="step-title">Opens Attendance</h4>
+          <p class="step-desc">Student accesses the Geolocation Attendance marking module.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4 class="step-title">Location Is Verified</h4>
+          <p class="step-desc">Browser requests GPS access and acquires exact latitude and longitude.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <h4 class="step-title">Distance Calculated</h4>
+          <p class="step-desc">Java backend computes distance to hostel using Haversine formula.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">6</div>
+          <h4 class="step-title">Attendance Recorded</h4>
+          <p class="step-desc">If within permitted 100m radius, attendance is marked PRESENT in MySQL.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">7</div>
+          <h4 class="step-title">History Updated</h4>
+          <p class="step-desc">Attendance logs and percentage statistics update instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section" id="tech-stack">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Technology Architecture</span>
+        <h2 class="section-title">Technology Stack</h2>
+        <p class="section-subtitle">
+          Built with clean Java Object-Oriented principles, Spring Boot REST APIs, and modern web standards.
+        </p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-chip">☕ Java 17+ (OOP Core)</div>
+        <div class="tech-chip">🌱 Spring Boot 3</div>
+        <div class="tech-chip">🐬 MySQL Database</div>
+        <div class="tech-chip">🌐 Spring Data JPA / Hibernate</div>
+        <div class="tech-chip">🛰️ Browser Geolocation API</div>
+        <div class="tech-chip">📐 Haversine Formula Algorithm</div>
+        <div class="tech-chip">🔒 BCrypt Security Hashing</div>
+        <div class="tech-chip">⚡ HTML5 / Modern CSS3</div>
+        <div class="tech-chip">📜 Vanilla JavaScript (ES6+)</div>
+        <div class="tech-chip">🚀 RESTful Web APIs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="nav-brand" style="margin-bottom: 1rem;">
+            <div class="brand-badge">📍</div>
+            <div class="brand-text">
+              <span class="title" style="font-size: 1.1rem;">SMART HOSTEL ATTENDANCE</span>
+              <span class="subtitle">Location-Verified College Project</span>
+            </div>
+          </div>
+          <p style="color: #94a3b8; font-size: 0.88rem; max-width: 320px;">
+            A modern Java Object-Oriented college project designed for secure hostel attendance management.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 1rem;">Quick Links</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem;">
+            <li><a href="login.html">Student Login</a></li>
+            <li><a href="register.html">Student Registration</a></li>
+            <li><a href="dashboard.html">Student Dashboard</a></li>
+            <li><a href="attendance.html">Mark Attendance</a></li>
+            <li><a href="history.html">Attendance History</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: #fff; font-size: 1rem; margin-bottom: 1rem;">Institution Details</h4>
+          <p style="color: #fff; font-weight: 600; font-size: 0.9rem;">Adi Shankara Institute of Science and Technology</p>
+          <p style="color: #94a3b8; font-size: 0.85rem;">B.Tech Computer Science and Engineering</p>
+          <p style="color: #94a3b8; font-size: 0.85rem;">Mattoor, Kalady, Ernakulam, Kerala - 683574</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Smart Hostel Attendance Management System. All rights reserved.</div>
+        <div style="font-family: var(--font-mono); color: #38bdf8;">GitHub-Ready Java OOP Project</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

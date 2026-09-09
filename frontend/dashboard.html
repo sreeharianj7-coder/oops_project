@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Smart Hostel Attendance System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="nav-brand">
+        <div class="brand-badge">📍</div>
+        <div class="brand-text">
+          <span class="title">SMART HOSTEL ATTENDANCE</span>
+          <span class="subtitle">Adi Shankara Institute of Science & Technology</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="dashboard.html" class="nav-link active"><span>📊</span> Dashboard</a></li>
+        <li><a href="attendance.html" class="nav-link"><span>🛰️</span> Mark Attendance</a></li>
+        <li><a href="history.html" class="nav-link"><span>📋</span> Attendance History</a></li>
+        <li><a href="profile.html" class="nav-link"><span>👤</span> Profile</a></li>
+      </ul>
+      <div class="nav-auth" id="nav-auth-section">
+        <!-- Injected dynamically by Auth.initNav() -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Main Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    <!-- Welcome Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 style="font-size: 2.1rem; margin-bottom: 0.3rem;">
+          Welcome back, <span id="dash-welcome-name" style="color: var(--accent-blue);">Student</span>
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Adi Shankara Institute of Science and Technology • Hostel Residence Portal
+        </p>
+      </div>
+      <div>
+        <a href="attendance.html" id="dash-attendance-action-btn" class="btn btn-primary btn-lg">
+          <span>🛰️</span> Mark Attendance Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Top Row: Student Profile Card & Today's Attendance Status Card -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+      
+      <!-- Student Info Card -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem;">
+            <div>
+              <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Student Identity</span>
+              <h3 id="dash-student-name" style="font-size: 1.35rem; color: #fff; margin-top: 0.2rem;">Loading...</h3>
+            </div>
+            <span id="dash-student-id" class="badge badge-info">ASIET2024CS000</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.88rem;">
+            <div>
+              <span style="color: #64748b; display: block; font-size: 0.75rem;">Course / Program</span>
+              <span id="dash-course" style="color: #e2e8f0; font-weight: 500;">B.Tech CSE</span>
+            </div>
+            <div>
+              <span style="color: #64748b; display: block; font-size: 0.75rem;">Department</span>
+              <span id="dash-department" style="color: #e2e8f0; font-weight: 500;">CSE</span>
+            </div>
+            <div>
+              <span style="color: #64748b; display: block; font-size: 0.75rem;">Hostel Allocation</span>
+              <span id="dash-hostel" style="color: #38bdf8; font-weight: 600;">Main Hostel</span>
+            </div>
+            <div>
+              <span style="color: #64748b; display: block; font-size: 0.75rem;">Room Number</span>
+              <span id="dash-room" style="color: #e2e8f0; font-weight: 500;">A-204</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; pt: 1rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: flex-end;">
+          <a href="profile.html" style="font-size: 0.85rem; color: #38bdf8; font-weight: 600;">View Full Profile &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Today's Attendance Status Widget -->
+      <div class="card" style="background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.2), rgba(15, 23, 42, 0.8));">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Today's Attendance Status</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin: 1rem 0;">
+          <div>
+            <div id="dash-today-status-badge" class="badge badge-not-marked" style="font-size: 0.95rem; padding: 0.5rem 1rem;">
+              NOT MARKED
+            </div>
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.6rem;">
+              Evening roll-call verification window
+            </div>
+          </div>
+          <div style="font-size: 3rem;">
+            🛰️
+          </div>
+        </div>
+
+        <div style="background: rgba(8, 13, 26, 0.7); padding: 0.85rem 1rem; border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.2); font-size: 0.85rem; color: #cbd5e1;">
+          <span>📍 Verification Method: <strong>Browser Geolocation API + Backend Haversine Distance</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Row: Attendance Metrics & Statistics -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+      <div class="card" style="text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Total Attendance Records</span>
+        <h2 id="stat-total-days" style="font-size: 2.4rem; color: #fff; margin: 0.4rem 0;">0</h2>
+        <span style="font-size: 0.8rem; color: #38bdf8;">Calendar Days Logged</span>
+      </div>
+
+      <div class="card" style="text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Days Present (Verified)</span>
+        <h2 id="stat-present-days" style="font-size: 2.4rem; color: #34d399; margin: 0.4rem 0;">0</h2>
+        <span style="font-size: 0.8rem; color: #34d399;">Within Hostel Perimeter</span>
+      </div>
+
+      <div class="card" style="text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Attendance Rate</span>
+        <h2 id="stat-percentage" style="font-size: 2.4rem; color: #00d2ff; margin: 0.4rem 0;">100%</h2>
+        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin-top: 0.5rem;">
+          <div id="stat-progress-bar" style="height: 100%; width: 100%; background: linear-gradient(90deg, #2563eb, #00d2ff); border-radius: 10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Hostel Coordinates Configuration & Future Biometrics Banner -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+      
+      <!-- Hostel Configuration Card -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.15rem; color: #fff;">Hostel Geolocation Configuration</h3>
+          <span class="badge badge-info">Active Boundary</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem;">
+            <span style="color: #94a3b8;">Hostel Name</span>
+            <span id="dash-cfg-hostel-name" style="font-weight: 600; color: #fff;">ASIET Main Hostel</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem;">
+            <span style="color: #94a3b8;">Configured Latitude</span>
+            <span id="dash-cfg-lat" style="font-family: var(--font-mono); color: #38bdf8;">10.169830° N</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem;">
+            <span style="color: #94a3b8;">Configured Longitude</span>
+            <span id="dash-cfg-lon" style="font-family: var(--font-mono); color: #38bdf8;">76.435740° E</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #94a3b8;">Allowed Perimeter Radius</span>
+            <span id="dash-cfg-radius" style="font-weight: 700; color: #34d399;">100 meters</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future Face Recognition Card -->
+      <div class="card" style="background: linear-gradient(135deg, rgba(88, 28, 135, 0.25), rgba(15, 23, 42, 0.8)); border-color: rgba(192, 132, 252, 0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.15rem; color: #c084fc;">Face Recognition Module</h3>
+          <span class="badge badge-future">FUTURE DEVELOPMENT</span>
+        </div>
+        <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+          Biometric facial matching is planned for Phase 2 of this project. The current version utilizes authoritative <strong>Student Login + Geolocation Verification</strong>.
+        </p>
+        <div style="font-size: 0.8rem; color: #94a3b8; background: rgba(0,0,0,0.3); padding: 0.6rem 0.8rem; border-radius: 8px;">
+          Architecture Note: Designed with Java OOP interface abstraction (<code>FaceVerificationService.java</code>).
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

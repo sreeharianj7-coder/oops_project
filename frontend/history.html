@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance History | Smart Hostel Attendance System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="nav-brand">
+        <div class="brand-badge">📍</div>
+        <div class="brand-text">
+          <span class="title">SMART HOSTEL ATTENDANCE</span>
+          <span class="subtitle">Adi Shankara Institute of Science & Technology</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="dashboard.html" class="nav-link"><span>📊</span> Dashboard</a></li>
+        <li><a href="attendance.html" class="nav-link"><span>🛰️</span> Mark Attendance</a></li>
+        <li><a href="history.html" class="nav-link active"><span>📋</span> Attendance History</a></li>
+        <li><a href="profile.html" class="nav-link"><span>👤</span> Profile</a></li>
+      </ul>
+      <div class="nav-auth" id="nav-auth-section">
+        <!-- Injected dynamically by Auth.initNav() -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- History Main Content -->
+  <main class="container" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+    <!-- Page Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.3rem;">Attendance Audit History</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+          Verified attendance logs for <span id="hist-student-name" style="color: #fff; font-weight: 600;">Student</span> (<span id="hist-student-id" style="font-family: var(--font-mono); color: #38bdf8;">ASIET2024CS000</span>)
+        </p>
+      </div>
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="btn btn-secondary btn-sm" onclick="exportToCSV()">
+          <span>📥</span> Export CSV
+        </button>
+        <a href="attendance.html" class="btn btn-primary btn-sm">
+          <span>🛰️</span> Mark Today
+        </a>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+      <div class="card" style="padding: 1.25rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Total Logs</span>
+        <h3 id="hist-metric-total" style="font-size: 1.8rem; color: #fff; margin-top: 0.2rem;">0</h3>
+      </div>
+
+      <div class="card" style="padding: 1.25rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Present (Verified)</span>
+        <h3 id="hist-metric-present" style="font-size: 1.8rem; color: #34d399; margin-top: 0.2rem;">0</h3>
+      </div>
+
+      <div class="card" style="padding: 1.25rem; text-align: center;">
+        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">Avg Proximity Distance</span>
+        <h3 id="hist-metric-avg-dist" style="font-size: 1.8rem; color: #00d2ff; margin-top: 0.2rem;">0 m</h3>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem; background: rgba(11, 17, 32, 0.9);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div style="flex-grow: 1; max-width: 320px;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search by date (YYYY-MM-DD)..." oninput="filterRecords()" style="padding: 0.6rem 1rem;">
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <label for="status-filter" style="font-size: 0.85rem; color: #94a3b8;">Status:</label>
+          <select id="status-filter" class="form-control" onchange="filterRecords()" style="padding: 0.6rem 2.2rem 0.6rem 0.9rem; width: auto;">
+            <option value="ALL">All Records</option>
+            <option value="PRESENT">Present Only</option>
+            <option value="REJECTED">Rejected Only</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Attendance Table -->
+    <div class="table-wrapper">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Timestamp</th>
+            <th>Location Status</th>
+            <th>Distance From Hostel</th>
+            <th>Attendance Status</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body">
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 2rem; color: #94a3b8;">
+              Loading attendance history...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

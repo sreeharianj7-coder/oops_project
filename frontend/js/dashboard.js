@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('dash-cfg-hostel-name').innerText = hostel.hostelName || hostel.name || 'ASIET Main Hostel';
   document.getElementById('dash-cfg-lat').innerText = hostel.latitude ? hostel.latitude.toFixed(6) + '° N' : '10.169830° N';
   document.getElementById('dash-cfg-lon').innerText = hostel.longitude ? hostel.longitude.toFixed(6) + '° E' : '76.435740° E';
-  document.getElementById('dash-cfg-radius').innerText = (hostel.allowedRadius || 100) + ' meters';
+  document.getElementById('dash-cfg-radius').innerText = (hostel.allowedRadius || 1000) + ' meters';
 
   // Load Live Attendance Stats
   await loadDashboardStats(student.studentId);

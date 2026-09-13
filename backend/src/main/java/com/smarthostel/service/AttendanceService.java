@@ -25,12 +25,17 @@ import java.util.Optional;
  * ATTENDANCE SERVICE (Business Logic & Verification Workflow Layer)
  * ============================================================================
  * 
- * Coordinates location verification, duplicate check, and attendance recording.
+ * Coordinates 1st-year time restriction validation, location verification,
+ * duplicate check, and attendance persistence.
  */
 @Service
 public class AttendanceService {
 
     private static final Logger log = LoggerFactory.getLogger(AttendanceService.class);
+
+    // 1st-Year attendance window policy: 09:00 AM to 05:00 PM (17:00)
+    public static final LocalTime FIRST_YEAR_START_TIME = LocalTime.of(9, 0, 0);
+    public static final LocalTime FIRST_YEAR_END_TIME = LocalTime.of(17, 0, 0);
 
     private final AttendanceRepository attendanceRepository;
     private final StudentRepository studentRepository;
@@ -46,29 +51,65 @@ public class AttendanceService {
     }
 
     /**
-     * Records verified attendance for a student.
+     * Validates whether the student is allowed to mark attendance at the given time.
+     * Enforces institutional policy: 1st-year students are restricted to marking
+     * attendance exclusively within the 9:00 AM to 5:00 PM time window.
+     * 
+     * @param student The student attempting to mark attendance
+     * @param attendanceTime The current timestamp
+     * @throws IllegalArgumentException if 1st-year student attempts marking outside the allowed window
+     */
+    public void validateTimeWindowRestriction(Student student, LocalTime attendanceTime) {
+        if (student != null && student.isFirstYear()) {
+            if (attendanceTime.isBefore(FIRST_YEAR_START_TIME) || attendanceTime.isAfter(FIRST_YEAR_END_TIME)) {
+                log.warn("Attendance rejected for 1st-year student {}: Attempted at {} outside allowed window (09:00 AM - 05:00 PM)",
+                        student.getStudentId(), attendanceTime);
+                throw new IllegalArgumentException(
+                        "Attendance restriction: 1st-year students are only permitted to mark attendance between 09:00 AM and 05:00 PM. (Current time: " 
+                        + attendanceTime.withNano(0) + ")"
+                );
+            }
+        }
+    }
+
+    /**
+     * Records verified attendance for a student (using system clock).
      * 
      * @param request Mark attendance request with GPS coordinates
      * @return Saved Attendance entity
      */
     @Transactional
     public Attendance markAttendance(MarkAttendanceRequest request) {
-        String studentId = request.getStudentId().trim().toUpperCase();
-        LocalDate today = LocalDate.now();
-        LocalTime now = LocalTime.now();
+        return markAttendance(request, LocalDate.now(), LocalTime.now());
+    }
 
-        log.info("Attempting to mark attendance for Student: {} on Date: {}", studentId, today);
+    /**
+     * Overloaded method accepting explicit date and time for testability and deterministic validation.
+     * 
+     * @param request Mark attendance request with GPS coordinates
+     * @param today Attendance date
+     * @param now Attendance time
+     * @return Saved Attendance entity
+     */
+    @Transactional
+    public Attendance markAttendance(MarkAttendanceRequest request, LocalDate today, LocalTime now) {
+        String studentId = request.getStudentId().trim().toUpperCase();
+
+        log.info("Attempting to mark attendance for Student: {} on Date: {} at Time: {}", studentId, today, now);
 
         // 1. Verify Student existence
         Student student = studentRepository.findByStudentId(studentId)
                 .orElseThrow(() -> new IllegalArgumentException("Student not found with ID: " + studentId));
 
-        // 2. Prevent duplicate daily attendance
+        // 2. Enforce 1st-Year Time Window Restriction (9:00 AM to 5:00 PM)
+        validateTimeWindowRestriction(student, now);
+
+        // 3. Prevent duplicate daily attendance
         if (attendanceRepository.existsByStudentIdAndAttendanceDate(studentId, today)) {
             throw new IllegalStateException("Attendance has already been marked for today (" + today + ")");
         }
 
-        // 3. Perform authoritative server-side location verification
+        // 4. Perform authoritative server-side location verification
         LocationVerifyRequest verifyReq = new LocationVerifyRequest(
                 studentId, request.getLatitude(), request.getLongitude(), request.getAccuracy()
         );
@@ -81,7 +122,7 @@ public class AttendanceService {
                     verifyRes.getHostelName() + "). Distance: " + verifyRes.getDistance() + "m, Allowed: " + verifyRes.getAllowedRadius() + "m.");
         }
 
-        // 4. Save Attendance record
+        // 5. Save Attendance record
         Attendance attendance = new Attendance(
                 studentId,
                 today,

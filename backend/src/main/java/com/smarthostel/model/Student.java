@@ -182,4 +182,22 @@ public class Student {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    /**
+     * Checks if the student is in their 1st year of study.
+     * Evaluates academicYear field for variations such as "1st Year", "1st Year (2026-2030)", "First Year", "Year 1", etc.
+     * 
+     * @return true if the student is in their 1st year, false otherwise
+     */
+    public boolean isFirstYear() {
+        if (this.academicYear == null || this.academicYear.trim().isEmpty()) {
+            return false;
+        }
+        String normalized = this.academicYear.trim().toLowerCase();
+        return normalized.contains("1st") ||
+               normalized.contains("first") ||
+               normalized.startsWith("1") ||
+               normalized.contains("year 1") ||
+               normalized.contains("year-1");
+    }
 }

@@ -43,38 +43,38 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) {
         log.info("Checking database initialization status...");
 
-        // 1. Initialize Hostels if empty
+        // 1. Initialize Hostels if empty (Main campus geofence: 1000m / 1km radius)
         if (hostelRepository.count() == 0) {
-            log.info("Seeding default Adi Shankara Institute hostels...");
+            log.info("Seeding default Adi Shankara Institute hostels with 1000m geofence radius...");
             Hostel mainHostel = new Hostel(
-                    "ASIET Main College Hostel", 
-                    10.16983000, 
-                    76.43574000, 
-                    100, 
-                    "Main Campus Hostel - Block A, Adi Shankara Institute of Science and Technology"
+                    "Adi Shankara Institute Main Campus Hostel", 
+                    10.1706000, 
+                    76.4357000, 
+                    1000, 
+                    "Main Campus Hostel - Block A, Adi Shankara Institute of Science and Technology, Kalady"
             );
             Hostel boysHostel = new Hostel(
                     "ASIET Boys Hostel (Block B)", 
-                    10.17012000, 
-                    76.43615000, 
-                    120, 
+                    10.1708500, 
+                    76.4359200, 
+                    1000, 
                     "Senior Boys Hostel, Mattoor-Kalady Campus"
             );
             Hostel ladiesHostel = new Hostel(
                     "ASIET Ladies Hostel (Block C)", 
-                    10.16945000, 
-                    76.43522000, 
-                    100, 
+                    10.1714000, 
+                    76.4364000, 
+                    1000, 
                     "Womens Hostel, North Wing"
             );
 
             hostelRepository.save(mainHostel);
             hostelRepository.save(boysHostel);
             hostelRepository.save(ladiesHostel);
-            log.info("Hostels initialized successfully.");
+            log.info("Hostels initialized successfully with 1000m geofence.");
         }
 
-        // 2. Initialize Sample Student if empty
+        // 2. Initialize Sample Students if empty (includes 1st-year and senior students)
         if (studentRepository.count() == 0) {
             log.info("Seeding demo students...");
             Hostel defaultHostel = hostelRepository.findAll().get(0);
@@ -89,7 +89,7 @@ public class DataInitializer implements CommandLineRunner {
                     "+91 98765 43210",
                     "B.Tech Computer Science and Engineering",
                     "Computer Science and Engineering",
-                    "2023 - 2027",
+                    "3rd Year (2023-2027)",
                     defaultHostel,
                     "A-204",
                     defaultHash
@@ -102,22 +102,36 @@ public class DataInitializer implements CommandLineRunner {
                     "+91 98451 23456",
                     "B.Tech Computer Science and Engineering",
                     "Computer Science and Engineering",
-                    "2023 - 2027",
+                    "3rd Year (2023-2027)",
                     defaultHostel,
                     "C-108",
                     defaultHash
             );
 
+            Student student3 = new Student(
+                    "ASIET2026CS001",
+                    "Aditya Varma",
+                    "aditya.cs26@adishankara.ac.in",
+                    "+91 98123 45678",
+                    "B.Tech Computer Science and Engineering",
+                    "Computer Science and Engineering",
+                    "1st Year (2026-2030)",
+                    defaultHostel,
+                    "A-102",
+                    defaultHash
+            );
+
             studentRepository.save(student1);
             studentRepository.save(student2);
+            studentRepository.save(student3);
 
             // Seed sample past attendance
             Attendance record1 = new Attendance(
                     "ASIET2024CS001",
                     LocalDate.now().minusDays(2),
                     LocalTime.of(8, 45, 10),
-                    10.169840,
-                    76.435730,
+                    10.170620,
+                    76.435715,
                     2.1,
                     "VERIFIED",
                     "PRESENT",
@@ -128,9 +142,21 @@ public class DataInitializer implements CommandLineRunner {
                     "ASIET2024CS001",
                     LocalDate.now().minusDays(1),
                     LocalTime.of(8, 41, 22),
-                    10.169880,
-                    76.435790,
+                    10.170590,
+                    76.435680,
                     8.4,
+                    "VERIFIED",
+                    "PRESENT",
+                    "GEOLOCATION"
+            );
+
+            Attendance record3 = new Attendance(
+                    "ASIET2026CS001",
+                    LocalDate.now().minusDays(1),
+                    LocalTime.of(9, 30, 0),
+                    10.170605,
+                    76.435702,
+                    0.6,
                     "VERIFIED",
                     "PRESENT",
                     "GEOLOCATION"
@@ -138,6 +164,7 @@ public class DataInitializer implements CommandLineRunner {
 
             attendanceRepository.save(record1);
             attendanceRepository.save(record2);
+            attendanceRepository.save(record3);
 
             log.info("Sample students and historical attendance records seeded successfully.");
         }

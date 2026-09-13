@@ -108,7 +108,7 @@ sequenceDiagram
     Browser->>Backend: POST /api/attendance/verify-location (Lat, Lon, StudentID)
     Backend->>DB: Fetches Assigned Hostel (Latitude, Longitude, Allowed Radius)
     Backend->>Backend: Calculates Distance using Haversine Formula
-    alt Distance <= Allowed Radius (e.g. 100m)
+    alt Distance <= Allowed Radius (e.g. 1000m)
         Backend-->>Browser: Returns "VERIFIED" (Distance: 12.5m)
         Browser->>Student: Shows LOCATION VERIFIED & Enables "Mark Attendance"
         Student->>Browser: Clicks "Mark Attendance"
@@ -116,7 +116,7 @@ sequenceDiagram
         Backend->>DB: Saves Attendance Record (Date, Time, Lat, Lon, Status=PRESENT)
         Backend-->>Browser: "Attendance Marked Successfully"
     else Distance > Allowed Radius
-        Backend-->>Browser: Returns "LOCATION OUTSIDE HOSTEL" (Distance: 850m)
+        Backend-->>Browser: Returns "LOCATION OUTSIDE HOSTEL" (Distance: 1500m)
         Browser->>Student: Rejects Attendance & Displays Out-of-Bounds Alert
     end
 ```
@@ -180,11 +180,13 @@ python -m http.server 3000 --directory frontend
 
 ## 🔑 Demo Login Credentials (Ready to Test)
 
-| Field | Value |
-|---|---|
-| **Student ID / Email** | `ASIET2024CS001` or `rahul.cs@adishankara.ac.in` |
-| **Password** | `Password@123` |
-| **Hostel** | ASIET Main College Hostel (100m Allowed Radius) |
+| Field | Senior Student (No Time Restriction) | 1st-Year Student (9:00 AM - 5:00 PM Window) |
+|---|---|---|
+| **Student ID** | `ASIET2024CS001` | `ASIET2026CS001` |
+| **Email** | `rahul.cs@adishankara.ac.in` | `aditya.cs26@adishankara.ac.in` |
+| **Password** | `Password@123` | `Password@123` |
+| **Academic Year** | 3rd Year (2023-2027) | 1st Year (2026-2030) |
+| **Hostel & Radius** | Main Campus Hostel (1000m Allowed Radius) | Main Campus Hostel (1000m Allowed Radius) |
 
 ---
 

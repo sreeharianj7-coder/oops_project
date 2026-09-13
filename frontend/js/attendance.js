@@ -248,21 +248,21 @@ async function handleMarkAttendance() {
 }
 
 /**
- * Coordinate Simulator Helper (for testing inside/outside campus)
+ * Coordinate Simulator Helper (for testing inside/outside campus geofence)
  */
 function setSimulatedCoords(mode) {
   if (mode === 'inside') {
-    // Exact ASIET Campus Hostel location (~10.169830, 76.435740)
+    // Inside Adi Shankara Institute Campus Geofence (~10.170600, 76.435700)
     handleVerifyLocation({
-      latitude: 10.169845,
-      longitude: 76.435750,
+      latitude: 10.170620,
+      longitude: 76.435715,
       accuracy: 4.0
     });
   } else if (mode === 'outside') {
-    // Point outside campus radius (~850m away)
+    // Point outside 1km campus radius (~2.2km away)
     handleVerifyLocation({
-      latitude: 10.177500,
-      longitude: 76.442000,
+      latitude: 10.185000,
+      longitude: 76.450000,
       accuracy: 6.0
     });
   }

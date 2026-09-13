@@ -20,7 +20,7 @@ CREATE TABLE hostels (
     hostel_name VARCHAR(150) NOT NULL UNIQUE,
     latitude DECIMAL(10, 8) NOT NULL,
     longitude DECIMAL(11, 8) NOT NULL,
-    allowed_radius INT NOT NULL DEFAULT 100 COMMENT 'Allowed radius in meters',
+    allowed_radius INT NOT NULL DEFAULT 1000 COMMENT 'Allowed radius in meters (default 1000m for 1km geofence)',
     description VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

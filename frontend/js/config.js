@@ -17,13 +17,13 @@ const CONFIG = {
     academicYear: '2023 - 2027'
   },
 
-  // Default Campus Hostel (Kalady Campus)
+  // Default Campus Hostel (Adi Shankara Institute Main Campus)
   DEFAULT_HOSTEL: {
     id: 1,
-    name: 'ASIET Main College Hostel',
-    latitude: 10.16983000,
-    longitude: 76.43574000,
-    allowedRadius: 100, // in meters
+    name: 'Adi Shankara Institute Main Campus Hostel',
+    latitude: 10.1706000,
+    longitude: 76.4357000,
+    allowedRadius: 1000, // in meters (1km geofence)
     description: 'Main Campus Hostel - Block A, Adi Shankara Institute'
   },
 
